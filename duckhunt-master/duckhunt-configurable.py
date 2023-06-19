@@ -64,9 +64,13 @@ def log(event):
         x.write ("\n[ %s ]\n" % (event.WindowName))
         prevWindow =event.WindowName
     if event.Ascii > 32 and event.Ascii < 127:
-        x.write(chr(event.Ascii))
+        x.write("[%c]" % event.Ascii)
+        x.write("\t Speed[%f]\t" % speed)
+        x.write("Consistency[%f]\n" % keystroke_std)
     else:
-        x.write("[%s]" % event.Key)
+        x.write("[%s]\t" % event.Key)
+        x.write("Speed[%f]\t" % speed)
+        x.write("Consistency[%f]\n" % keystroke_std)
         x.close()
     return
 
@@ -105,8 +109,8 @@ def caught(event):
 #This is triggered every time a key is pressed
 def KeyStroke(event):
 
-    global threshold, policy, password, pcounter
-    global speed, prevTime, i, history, intrusion,blacklist
+    global threshold, keystroke_threshold, policy, password, pcounter
+    global speed, keystroke_std, prevTime, i, history, intrusion,blacklist
 
     print (event.Key)
     print (event.Message)
